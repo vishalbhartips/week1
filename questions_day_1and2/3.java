@@ -1,4 +1,4 @@
-package questions;
+package questions_day_1and2;
 
 class GrandParent {
     public void displayGrandParent() {
