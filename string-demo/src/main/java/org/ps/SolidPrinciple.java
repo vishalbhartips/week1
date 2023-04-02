@@ -1,5 +1,9 @@
 package org.ps;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class SolidPrinciple {
 }
 
@@ -33,37 +37,44 @@ class EmailSender {
 //
 //        Example:
 
-interface Shape {
-    double area();
+interface Operation{
+   public void func(int x, int y);
 }
-
-class Rectangle implements Shape {
-    private double width;
-    private double height;
-
-    public Rectangle(double width, double height) {
-        this.width = width;
-        this.height = height;
-    }
-
-    public double area() {
-        return width * height;
+class AdditionOperation implements Operation {
+    @Override
+    public void func(int x, int y) {
+        int sum = x + y;
+        System.out.println("Addition : " + sum);
     }
 }
-
-class Circle implements Shape {
-    private double radius;
-
-    public Circle(double radius) {
-        this.radius = radius;
-    }
-
-    public double area() {
-        return Math.PI * radius * radius;
+class SubstractionOperation implements Operation {
+    @Override
+    public void func(int x, int y) {
+        int sub = x - y;
+        System.out.println("Substraction : " + sub);
     }
 }
 
-//In this example, the Shape interface is open for extension, as we can add new shapes that implement this interface. However, the Rectangle and Circle classes are closed for modification, as we don't need to modify their code to add new shapes.
+class Calculator{
+    List<Operation> operations;
+
+    public Calculator(List<Operation> operations) {
+        this.operations = operations;
+    }
+
+    public static void main(String[] args) {
+        List<Operation> listOfOperation = new ArrayList();
+        listOfOperation.add(new AdditionOperation());
+        listOfOperation.add(new SubstractionOperation());
+        Calculator calculator = new Calculator(listOfOperation);
+        calculator.operations.stream().filter(operation -> operation.getClass() == AdditionOperation.class).collect(Collectors.toList()).get(0).func(1, 2);
+        calculator.operations.stream().filter(operation -> operation.getClass() == SubstractionOperation.class).collect(Collectors.toList()).get(0).func(1, 2);
+    }
+}
+
+
+
+
 //
 //        3. Liskov Substitution Principle (LSP)
 //
