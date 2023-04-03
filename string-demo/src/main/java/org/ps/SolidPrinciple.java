@@ -58,12 +58,20 @@ class SubstractionOperation implements Operation {
 class Calculator{
     List<Operation> operations;
 
+    public Calculator() {
+        this.operations = new ArrayList<>();
+    }
+
     public Calculator(List<Operation> operations) {
         this.operations = operations;
     }
 
+    public void addOperation(Operation operation) {
+        operations.add(operation);
+    }
+
     public static void main(String[] args) {
-        List<Operation> listOfOperation = new ArrayList();
+        List<Operation> listOfOperation = new ArrayList<>();
         listOfOperation.add(new AdditionOperation());
         listOfOperation.add(new SubstractionOperation());
         Calculator calculator = new Calculator(listOfOperation);
@@ -75,7 +83,7 @@ class Calculator{
 
 
 
-//
+//In this example, if we need to add new operation we can implement Operation interface and add to list of Operations and perform the operation without modification of the code.
 //        3. Liskov Substitution Principle (LSP)
 //
 //        The LSP states that a subclass should be able to replace its parent class without affecting the correctness of the program. This means that a subclass should behave like its parent class.
